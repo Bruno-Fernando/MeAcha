@@ -1,0 +1,28 @@
+{
+  "name": "meacha",
+  "version": "1.0.0",
+  "description": "App com objetivo de ajudar pessoas a encontrarem itens perdidos.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server",
+    "dev": "nodemon server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bruno-Fernando/MeAcha.git"
+  },
+  "author": "Bruno Fernando",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bruno-Fernando/MeAcha/issues"
+  },
+  "homepage": "https://github.com/Bruno-Fernando/MeAcha#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.9.3"
+  },
+  "devDependencies": {
+    "concurrently": "^5.1.0",
+    "nodemon": "^2.0.2"
+  }
+}
