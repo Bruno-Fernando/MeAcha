@@ -14,7 +14,7 @@ router
         });
       } else {
         posts.sort((postA, postB) => postB.createdAt - postA.createdAt);
-        
+
         return res.status(200).json({
           success: true,
           data: posts
@@ -48,7 +48,21 @@ router
 
 router
   .route("/:id")
-  .get((req, res) => res.send(`found get with id: ${req.params.id}`))
+  .get((req, res) => {
+    FoundPost.findById(req.params.id, (err, post) => {
+      if (err) {
+        return res.status(404).json({
+          success: false,
+          error: "Post not found"
+        });
+      } else {
+        return res.status(200).json({
+          success: true,
+          data: post
+        });
+      }
+    });
+  })
   .put((req, res) => res.send(`found pus with id: ${req.params.id}`))
   .delete((req, res) => res.send(`found delete with id: ${req.params.id}`));
 

@@ -20,7 +20,7 @@ const PostSchema = new mongoose.Schema(
       default: Date.now
     }
   },
-  { discriminatorKey: "posttype" }
+  { discriminatorKey: "postType" }
 );
 
 // TODO adicionar imagens ao post
