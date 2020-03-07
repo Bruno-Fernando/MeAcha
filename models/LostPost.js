@@ -1,21 +1,12 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
+const Post = require("./Post");
 
-const LostPostSchema = new mongoose.Schema({
-    authorName: String,
-    authorEmail: String,
-    title: {
-        type: String,
-        required: [true, 'Add a title']
-    },
-    description: String,
+const LostPost = Post.discriminator(
+  "LostPost",
+  new mongoose.Schema({
     lostPlace: [String],
-    bounty: Number,
-    createdAt: {
-        type: Date,
-        default: Date.now
-    }
-});
+    bounty: Number
+  })
+);
 
-// TODO adicionar imagens ao post
-
-module.exports = mongoose.model('LostPost', LostPostSchema);
+module.exports = mongoose.model("LostPost");
