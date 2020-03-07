@@ -1,30 +1,15 @@
 const mongoose = require("mongoose");
+const Post = require("./Post");
 
-const FoundPostSchema = new mongoose.Schema({
-  authorName: {
-    type: String,
-    required: [true, "Add the author name"]
-  },
-  authorEmail: {
-    type: String,
-    required: [true, "Add the author email"]
-  },
-  title: {
-    type: String,
-    required: [true, "Add a title"]
-  },
-  description: String,
-  foundPlace: {
-    type: String,
-    required: [true, "Add the place you find the item"]
-  },
-  meetingPlace: String,
-  createdAt: {
-    type: Date,
-    default: Date.now
-  }
-});
+const FoundPost = Post.discriminator(
+  "FoundPost",
+  new mongoose.Schema({
+    foundPlace: {
+      type: String,
+      required: [true, "Add the place you find the item"]
+    },
+    meetingPlace: String
+  })
+);
 
-// TODO adicionar imagens ao post
-
-module.exports = mongoose.model("FoundPost", FoundPostSchema);
+module.exports = mongoose.model("FoundPost");
