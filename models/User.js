@@ -13,7 +13,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Add your password']
     },
-    posts: []
+    userPostIds: [String]
 });
 
 // TODO adicionar imagem de perfil do usuario
