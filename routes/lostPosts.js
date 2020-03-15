@@ -25,19 +25,10 @@ router
   .post((req, res) => {
     LostPost.create(req.body, (err, post) => {
       if (err) {
-        if (err.name === "ValidationError") {
-          const messages = Object.values(err.errors).map(val => val.message);
-
-          return res.status(400).json({
-            success: false,
-            error: messages
-          });
-        } else {
-          return res.status(500).json({
-            success: false,
-            error: "Server error"
-          });
-        }
+        return res.status(500).json({
+          success: false,
+          error: "Server error"
+        });
       } else {
         return res.status(201).json({
           success: true
