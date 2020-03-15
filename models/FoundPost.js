@@ -6,7 +6,7 @@ const FoundPost = Post.discriminator(
   new mongoose.Schema({
     foundPlace: {
       type: String,
-      required: [true, "Add the place you find the item"]
+      required: true
     },
     meetingPlace: String
   })

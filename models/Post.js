@@ -4,15 +4,15 @@ const PostSchema = new mongoose.Schema(
   {
     authorName: {
       type: String,
-      required: [true, "Add the author name"]
+      required: true
     },
     authorEmail: {
       type: String,
-      required: [true, "Add the author email"]
+      required: true
     },
     title: {
       type: String,
-      required: [true, "Add a title"]
+      required: true
     },
     description: String,
     createdAt: {

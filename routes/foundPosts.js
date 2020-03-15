@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const FoundPost = require("../models/FoundPost");
+const { foundPostValidation } = require("../middlewares/postValidation");
 
 router
   .route("/")
@@ -22,22 +23,13 @@ router
       }
     });
   })
-  .post((req, res) => {
+  .post(foundPostValidation, (req, res) => {
     FoundPost.create(req.body, (err, post) => {
       if (err) {
-        if (err.name === "ValidationError") {
-          const messages = Object.values(err.errors).map(val => val.message);
-
-          return res.status(400).json({
-            success: false,
-            error: messages
-          });
-        } else {
-          return res.status(500).json({
-            success: false,
-            error: "Server error"
-          });
-        }
+        return res.status(500).json({
+          success: false,
+          error: "Server error"
+        });
       } else {
         return res.status(201).json({
           success: true
