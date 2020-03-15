@@ -5,22 +5,22 @@ const LostPost = require("../models/LostPost");
 router
   .route("/")
   .get((req, res) => {
-    // TODO limitar a quantidade de posts em um range especificado
-    LostPost.find({}, (err, posts) => {
-      if (err) {
-        return res.status(500).json({
-          success: false,
-          error: "Server error"
-        });
-      } else {
-        posts.sort((postA, postB) => postB.createdAt - postA.createdAt);
-
-        return res.status(200).json({
-          success: true,
-          data: posts
-        });
-      }
-    });
+    LostPost.find()
+      .sort({ createdAt: -1 })
+      .limit(15)
+      .then((posts, err) => {
+        if (err) {
+          return res.status(500).json({
+            success: false,
+            error: "Server error"
+          });
+        } else {
+          return res.status(200).json({
+            success: true,
+            data: posts
+          });
+        }
+      });
   })
   .post((req, res) => {
     LostPost.create(req.body, (err, post) => {

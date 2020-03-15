@@ -6,22 +6,22 @@ const { foundPostValidation } = require("../middlewares/postValidation");
 router
   .route("/")
   .get((req, res) => {
-    // TODO limitar a quantidade de posts em um range especificado
-    FoundPost.find({}, (err, posts) => {
-      if (err) {
-        return res.status(500).json({
-          success: false,
-          error: "Server error"
-        });
-      } else {
-        posts.sort((postA, postB) => postB.createdAt - postA.createdAt);
-
-        return res.status(200).json({
-          success: true,
-          data: posts
-        });
-      }
-    });
+    FoundPost.find()
+      .sort({ createdAt: -1 })
+      .limit(15)
+      .then((posts, err) => {
+        if (err) {
+          return res.status(500).json({
+            success: false,
+            error: "Server error"
+          });
+        } else {
+          return res.status(200).json({
+            success: true,
+            data: posts
+          });
+        }
+      });
   })
   .post(foundPostValidation, (req, res) => {
     FoundPost.create(req.body, (err, post) => {
