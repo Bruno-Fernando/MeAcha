@@ -1,6 +1,6 @@
 const Joi = require("@hapi/joi");
 
-const antiInject = new RegExp("^[^$&{|]$");
+const antiInject = new RegExp("^[^$&{|]*$");
 
 const userSchema = Joi.object({
   name: Joi.string()
