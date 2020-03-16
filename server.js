@@ -1,12 +1,13 @@
-const express = require('express');
-const mongoose = require('mongoose');
+const express = require("express");
+const mongoose = require("mongoose");
 
-const connectDB = require('./config/db');
+const connectDB = require("./config/db");
 connectDB();
 
-const post = require('./routes/post');
-const lostPost = require('./routes/lostPosts');
-const foundPost = require('./routes/foundPosts');
+const post = require("./routes/post");
+const lostPost = require("./routes/lostPosts");
+const foundPost = require("./routes/foundPosts");
+const user = require("./routes/user");
 
 const app = express();
 
@@ -18,9 +19,10 @@ app.use(express.json());
 
 // PUT login
 
-app.use('/', post);
-app.use('/lost', lostPost);
-app.use('/found', foundPost);
+app.use("/", post);
+app.use("/lost", lostPost);
+app.use("/found", foundPost);
+app.use("/user", user);
 
 const PORT = process.env.PORT || 5000;
 
