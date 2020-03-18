@@ -3,18 +3,6 @@ const Joi = require("@hapi/joi");
 const antiInject = new RegExp("^[^$&{|]*$");
 
 const basePostSchema = {
-  authorName: Joi.string()
-    .trim()
-    .min(4)
-    .max(15)
-    .pattern(antiInject)
-    .required(),
-  authorEmail: Joi.string()
-    .trim()
-    .min(6)
-    .email()
-    .pattern(antiInject)
-    .required(),
   title: Joi.string()
     .trim()
     .max(20)

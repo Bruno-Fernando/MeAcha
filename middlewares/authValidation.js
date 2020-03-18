@@ -7,13 +7,13 @@ const authValidation = (req, res, next) => {
   if (!token) {
     return res.status(401).json({
       sucess: false,
-      error: "acess denied"
+      error: "access denied"
     });
   }
 
   try {
     const verified = jwt.verify(token, TOKEN_SECRET);
-    res.user = verified;
+    req.user = verified;
 
     next();
   } catch (err) {
