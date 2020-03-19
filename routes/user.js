@@ -3,18 +3,19 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const User = require("../models/User");
 const userValidation = require("../middlewares/userValidation");
+const authValidation = require("../middlewares/authValidation");
 
 router.post("/register", userValidation, (req, res) => {
   User.findOne({ email: req.body.email }, async (err, user) => {
     if (err) {
       return res.status(500).json({
         sucess: false,
-        error: "server error"
+        error: "Server error"
       });
     } else if (user) {
       return res.status(400).json({
         sucess: false,
-        error: "user already exists"
+        error: "User already exists"
       });
     } else {
       const { name, email, password } = req.body;
@@ -32,7 +33,7 @@ router.post("/register", userValidation, (req, res) => {
         if (err) {
           return res.status(500).json({
             sucess: false,
-            error: "server save error"
+            error: "Server save error"
           });
         }
         // TODO validacao por email
@@ -43,7 +44,23 @@ router.post("/register", userValidation, (req, res) => {
     }
   });
 });
-//get perfil /user e|ou /user/:id
+
+router.route("user/:id").get((req, res) => {
+  User.findById(req.params.id)
+    .select("-password")
+    .then(user => {
+      return res.status(200).json({
+        sucess: true,
+        user
+      });
+    })
+    .catch(err => {
+      return res.status(500).json({
+        sucess: false,
+        error: "Server error"
+      });
+    });
+});
 //put perfil /user ou /user/:id
 //delete perfil /user ou /user/:id
 

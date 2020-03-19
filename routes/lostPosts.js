@@ -8,18 +8,17 @@ router
     LostPost.find()
       .sort({ createdAt: -1 })
       .limit(15)
-      .then((posts, err) => {
-        if (err) {
-          return res.status(500).json({
-            success: false,
-            error: "Server error"
-          });
-        } else {
-          return res.status(200).json({
-            success: true,
-            data: posts
-          });
-        }
+      .then(posts => {
+        return res.status(200).json({
+          success: true,
+          data: posts
+        });
+      })
+      .catch(err => {
+        return res.status(500).json({
+          success: false,
+          error: "Server error"
+        });
       });
   })
   .post((req, res) => {
