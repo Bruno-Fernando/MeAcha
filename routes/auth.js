@@ -10,12 +10,12 @@ router.post("/login", loginValidation, (req, res) => {
   User.findOne({ email: req.body.email }, async (err, user) => {
     if (err) {
       return res.status(500).json({
-        sucess: false,
+        success: false,
         error: "Server error"
       });
     } else if (!user) {
       return res.status(400).json({
-        sucess: false,
+        success: false,
         error: "Email is not found"
       });
     } else {
@@ -23,7 +23,7 @@ router.post("/login", loginValidation, (req, res) => {
 
       if (!validPass) {
         return res.status(400).json({
-          sucess: false,
+          success: false,
           error: "Invalid password"
         });
       }

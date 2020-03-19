@@ -9,12 +9,12 @@ router.post("/register", userValidation, (req, res) => {
   User.findOne({ email: req.body.email }, async (err, user) => {
     if (err) {
       return res.status(500).json({
-        sucess: false,
+        success: false,
         error: "Server error"
       });
     } else if (user) {
       return res.status(400).json({
-        sucess: false,
+        success: false,
         error: "User already exists"
       });
     } else {
@@ -32,13 +32,13 @@ router.post("/register", userValidation, (req, res) => {
       User.create(newUser, (err, createdUser) => {
         if (err) {
           return res.status(500).json({
-            sucess: false,
+            success: false,
             error: "Server save error"
           });
         }
         // TODO validacao por email
         return res.status(201).json({
-          sucess: true
+          success: true
         });
       });
     }
@@ -50,13 +50,13 @@ router.route("user/:id").get((req, res) => {
     .select("-password")
     .then(user => {
       return res.status(200).json({
-        sucess: true,
+        success: true,
         user
       });
     })
     .catch(err => {
       return res.status(500).json({
-        sucess: false,
+        success: false,
         error: "Server error"
       });
     });

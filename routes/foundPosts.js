@@ -3,6 +3,7 @@ const router = express.Router();
 const FoundPost = require("../models/FoundPost");
 const User = require("../models/User");
 const { foundPostValidation } = require("../middlewares/postValidation");
+const { foundPostUpdateValidation } = require("../middlewares/postUpdateValidation");
 const authValidation = require("../middlewares/authValidation");
 
 router
@@ -67,7 +68,28 @@ router
       }
     });
   })
-  .put((req, res) => res.send(`found pus with id: ${req.params.id}`))
-  .delete((req, res) => res.send(`found delete with id: ${req.params.id}`));
+  .put(authValidation, foundPostUpdateValidation, (req, res) => {
+    User.findById(req.user, (err, user) => {
+      if (!user.userPostIds.includes(req.params.id)) {
+        return res.status(404).json({
+          success: false,
+          error: "Not allowed"
+        });
+      }
+    });
+
+    FoundPost.findOneAndUpdate(req.params.id, { ...req.body }, (err, post) => {
+      if (err) {
+        return res.status(500).json({
+          success: false,
+          error: "Server error"
+        });
+      }
+      return res.status(200).json({
+        success: true
+      });
+    });
+  })
+  .delete();
 
 module.exports = router;

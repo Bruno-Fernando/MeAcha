@@ -6,7 +6,7 @@ const authValidation = (req, res, next) => {
 
   if (!token) {
     return res.status(401).json({
-      sucess: false,
+      success: false,
       error: "Access denied"
     });
   }
@@ -18,7 +18,7 @@ const authValidation = (req, res, next) => {
     next();
   } catch (err) {
     return res.status(400).json({
-      sucess: false,
+      success: false,
       error: "Invalid token"
     });
   }
