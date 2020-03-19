@@ -90,6 +90,28 @@ router
       });
     });
   })
-  .delete();
+  .delete(authValidation, (req, res) => {
+    FoundPost.deleteOne(req.params.id, (err) => {
+      if (err) {
+        return res.status(500).json({
+          success: false,
+          error: "Server error"
+        });
+      }
+
+      User.findOneAndUpdate(req.user, { $pullAll: { userPostIds: [req.params.id] } }, (err) => {
+        if(err) {
+          return res.status(500).json({
+            success: false,
+            error: "Server error"
+          });
+        }
+      })
+
+      return res.status(200).json({
+        success: true
+      });
+    })
+  });
 
 module.exports = router;
