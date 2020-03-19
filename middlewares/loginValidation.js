@@ -1,4 +1,3 @@
-const Joi = require("@hapi/joi");
 const loginSchema = require("../validationSchemas/login");
 
 const loginValidation = (req, res, next) => {

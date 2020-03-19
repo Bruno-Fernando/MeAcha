@@ -1,4 +1,3 @@
-const Joi = require("@hapi/joi");
 const userSchema = require("../validationSchemas/user");
 
 const userValidation = (req, res, next) => {

@@ -71,7 +71,7 @@ router
   .put(authValidation, foundPostUpdateValidation, (req, res) => {
     User.findById(req.user, (err, user) => {
       if (!user.userPostIds.includes(req.params.id)) {
-        return res.status(404).json({
+        return res.status(403).json({
           success: false,
           error: "Not allowed"
         });
@@ -91,7 +91,7 @@ router
     });
   })
   .delete(authValidation, (req, res) => {
-    FoundPost.deleteOne(req.params.id, (err) => {
+    FoundPost.deleteOne(req.params.id, err => {
       if (err) {
         return res.status(500).json({
           success: false,
@@ -99,19 +99,23 @@ router
         });
       }
 
-      User.findOneAndUpdate(req.user, { $pullAll: { userPostIds: [req.params.id] } }, (err) => {
-        if(err) {
-          return res.status(500).json({
-            success: false,
-            error: "Server error"
-          });
+      User.findOneAndUpdate(
+        req.user,
+        { $pullAll: { userPostIds: [req.params.id] } },
+        err => {
+          if (err) {
+            return res.status(500).json({
+              success: false,
+              error: "Server error"
+            });
+          }
         }
-      })
+      );
 
       return res.status(200).json({
         success: true
       });
-    })
+    });
   });
 
 module.exports = router;

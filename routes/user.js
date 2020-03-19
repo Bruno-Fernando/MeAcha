@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 const User = require("../models/User");
 const userValidation = require("../middlewares/userValidation");
 const authValidation = require("../middlewares/authValidation");
+const userUpdateValidation = require("../middlewares/userUpdateValidation");
 
 router.post("/register", userValidation, (req, res) => {
   User.findOne({ email: req.body.email }, async (err, user) => {
@@ -45,23 +46,45 @@ router.post("/register", userValidation, (req, res) => {
   });
 });
 
-router.route("user/:id").get((req, res) => {
-  User.findById(req.params.id)
-    .select("-password")
-    .then(user => {
-      return res.status(200).json({
-        success: true,
-        user
+router
+  .route("user/:id")
+  .get((req, res) => {
+    User.findById(req.params.id)
+      .select("-password")
+      .then(user => {
+        return res.status(200).json({
+          success: true,
+          user
+        });
+      })
+      .catch(err => {
+        return res.status(500).json({
+          success: false,
+          error: "Server error"
+        });
       });
-    })
-    .catch(err => {
-      return res.status(500).json({
+  })
+  .put(authValidation, userUpdateValidation, (req, res) => {
+    if (req.user != req.params.id) {
+      return res.status(403).json({
         success: false,
-        error: "Server error"
+        error: "Not allowed"
+      });
+    }
+
+    User.findOneAndUpdate(req.params.id, { ...req.body }, err => {
+      if (err) {
+        return res.status(500).json({
+          success: false,
+          error: "Server error"
+        });
+      }
+      return res.status(200).json({
+        success: true
       });
     });
-});
-//put perfil /user ou /user/:id
+  });
+
 //delete perfil /user ou /user/:id
 
 module.exports = router;
