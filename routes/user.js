@@ -83,8 +83,27 @@ router
         success: true
       });
     });
-  });
+  })
+  .delete(authValidation, (req, res) => {
+    if (req.user != req.params.id) {
+      return res.status(403).json({
+        success: false,
+        error: "Not allowed"
+      });
+    }
 
-//delete perfil /user ou /user/:id
+    User.deleteOne(req.params.id, err => {
+      if (err) {
+        return res.status(500).json({
+          success: false,
+          error: "Server error"
+        });
+      }
+    });
+
+    return res.status(200).json({
+      success: true
+    });
+  });
 
 module.exports = router;
