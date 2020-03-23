@@ -1,24 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Navbar, Icon, NavItem } from "react-materialize";
+import "./App.css";
 
 function App() {
+  // https://www.pluralsight.com/guides/render-window-resize-react
   return (
+  
+  
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <div>
+        <Navbar
+          alignLinks="right"
+          brand={<div>
+            <a className="brand-logo right" href="#">
+              MeAcha
+            </a>
+            </div>
+          }
+          menuIcon={<Icon>menu</Icon>}
+          options={{
+            draggable: true,
+            edge: "left",
+            inDuration: 250,
+            onCloseEnd: null,
+            onCloseStart: null,
+            onOpenEnd: null,
+            onOpenStart: null,
+            outDuration: 200,
+            preventScrolling: true
+          }}
         >
-          Learn React
-        </a>
-      </header>
+          
+          <NavItem href="get-started.html">
+            <Icon>search</Icon>
+          </NavItem>
+          <NavItem href="get-started.html">Login/Perfil</NavItem>
+          <NavItem href="get-started.html">Criar Post</NavItem>
+          <NavItem href="get-started.html">Chat</NavItem>
+        </Navbar>
+        
+      </div>
     </div>
   );
 }
