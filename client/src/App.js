@@ -1,46 +1,23 @@
 import React from "react";
-import { Navbar, Icon, NavItem } from "react-materialize";
+
+import Nav from "./components/Nav";
+import Register from "./components/Register";
+
 import "./App.css";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 function App() {
-  // https://www.pluralsight.com/guides/render-window-resize-react
   return (
   
-  
-    <div className="App">
-      <div>
-        <Navbar
-          alignLinks="right"
-          brand={<div>
-            <a className="brand-logo right" href="#">
-              MeAcha
-            </a>
-            </div>
-          }
-          menuIcon={<Icon>menu</Icon>}
-          options={{
-            draggable: true,
-            edge: "left",
-            inDuration: 250,
-            onCloseEnd: null,
-            onCloseStart: null,
-            onOpenEnd: null,
-            onOpenStart: null,
-            outDuration: 200,
-            preventScrolling: true
-          }}
-        >
-          
-          <NavItem href="get-started.html">
-            <Icon>search</Icon>
-          </NavItem>
-          <NavItem href="get-started.html">Login/Perfil</NavItem>
-          <NavItem href="get-started.html">Criar Post</NavItem>
-          <NavItem href="get-started.html">Chat</NavItem>
-        </Navbar>
-        
-      </div>
-    </div>
+    <BrowserRouter>
+      <Nav />
+      <Switch>
+        <Route>
+          <Register path="/register" />
+        </Route>
+      </Switch>
+    </BrowserRouter>
+    
   );
 }
 
