@@ -13,17 +13,14 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme, fade } from "@material-ui/core/styles";
 import { MdSearch as SearchIcon } from "react-icons/md";
-import InputBase from "@material-ui/core/InputBase";
 import { FiFilter } from "react-icons/fi";
 
-import {
-  IoMdLogIn,
-  IoMdAddCircleOutline,
-  IoIosChatbubbles
-} from "react-icons/io";
+import { IoMdLogIn } from "react-icons/io";
 
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import { Avatar } from "@material-ui/core";
+
+import DeskNav from "./../DeskNav";
 
 const drawerWidth = 240;
 
@@ -97,8 +94,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function ResponsiveDrawer(props) {
-  const { container } = props;
+function ResponsiveDrawer() {
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -135,65 +131,6 @@ function ResponsiveDrawer(props) {
         </ListItem>
       </List>
       <Divider />
-    </div>
-  );
-
-  const topMenu = (
-    <div style={{ display: "flex", alignItems: "center" }}>
-      <form className={classes.search} onSubmit={e => e.preventDefault()}>
-        <InputBase
-          placeholder="Search…"
-          classes={{
-            root: classes.inputRoot,
-            input: classes.inputInput
-          }}
-          inputProps={{ "aria-label": "search" }}
-        />
-
-        <IconButton
-          type="submit"
-          className={classes.iconButton}
-          aria-label="search"
-        >
-          <SearchIcon />
-        </IconButton>
-      </form>
-
-      <List style={{ display: "flex" }}>
-        <ListItem button style={{ width: "auto" }}>
-          <ListItemIcon style={{ minWidth: 0, padding: "3px" }}>
-            <IoMdLogIn size="25px" />
-          </ListItemIcon>
-          <ListItemText primary="Logout" />
-        </ListItem>
-
-        <Link to="/new/post" style={{ textDecoration: "none", color: "#ffff" }}>
-          <ListItem button style={{ width: "auto" }}>
-            <ListItemIcon style={{ minWidth: 0, padding: "3px" }}>
-              <IoMdAddCircleOutline size="25px" />
-            </ListItemIcon>
-            <ListItemText primary="Criar Post" />
-          </ListItem>
-        </Link>
-
-        <Link to="/chat" style={{ textDecoration: "none", color: "#ffff" }}>
-          <ListItem button style={{ width: "auto" }}>
-            <ListItemIcon style={{ minWidth: 0, padding: "3px" }}>
-              <IoIosChatbubbles size="25px" />
-            </ListItemIcon>
-            <ListItemText primary="Chat" />
-          </ListItem>
-        </Link>
-
-        <Link to="/user" style={{ textDecoration: "none", color: "#ffff" }}>
-          <ListItem button style={{ width: "auto" }}>
-            <ListItemIcon style={{ minWidth: 0, padding: "3px" }}>
-              <Avatar style={{ width: "25px", height: "25px" }} />
-            </ListItemIcon>
-            <ListItemText primary="Perfil" />
-          </ListItem>
-        </Link>
-      </List>
     </div>
   );
 
@@ -236,7 +173,9 @@ function ResponsiveDrawer(props) {
           </Hidden>
 
           <Hidden xsDown implementation="css">
-            <div className={classes.sectionDesktop}>{topMenu}</div>
+            <div className={classes.sectionDesktop}>
+              <DeskNav />
+            </div>
           </Hidden>
         </Toolbar>
       </AppBar>
@@ -244,7 +183,6 @@ function ResponsiveDrawer(props) {
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Hidden smUp implementation="css">
           <SwipeableDrawer
-            container={container}
             variant="temporary"
             anchor={theme.direction === "rtl" ? "right" : "left"}
             open={mobileOpen}
