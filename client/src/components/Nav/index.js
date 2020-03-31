@@ -14,11 +14,11 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme, fade } from "@material-ui/core/styles";
 import { MdSearch as SearchIcon } from "react-icons/md";
 import { FiFilter } from "react-icons/fi";
-
+import FilterMenu from "./../FilterMobile";
 import { IoMdLogIn } from "react-icons/io";
 
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
-import { Avatar } from "@material-ui/core";
+import { Avatar, Grid } from "@material-ui/core";
 
 import DeskNav from "./../DeskNav";
 
@@ -156,20 +156,17 @@ function ResponsiveDrawer() {
           </div>
 
           <Hidden smUp implementation="css">
-            <IconButton
-              type="submit"
-              className={classes.iconButton}
-              aria-label="search"
-              style={{ color: "#ffff" }}
-            >
-              <SearchIcon />
-            </IconButton>
-            <IconButton
-              className={classes.iconButton}
-              style={{ color: "#ffff" }}
-            >
-              <FiFilter />
-            </IconButton>
+            <Grid container >
+              <IconButton
+                type="submit"
+                className={classes.iconButton}
+                aria-label="search"
+                style={{ color: "#ffff" }}
+              >
+                <SearchIcon />
+              </IconButton>
+              <FilterMenu />
+            </Grid>
           </Hidden>
 
           <Hidden xsDown implementation="css">
