@@ -12,5 +12,17 @@ export default makeStyles(theme => ({
   },
   drawerPaper: {
     width: 240
+  },
+  toolBar: {
+    display: "flex",
+    justifyContent: "space-between"
+  },
+  logoContainer: {
+    display: "flex",
+    alignItems: "center"
+  },
+  logo: {
+    textDecoration: "none",
+    color: "#ffff"
   }
 }));

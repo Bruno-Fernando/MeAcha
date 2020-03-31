@@ -30,8 +30,8 @@ export default function ResponsiveDrawer() {
   return (
     <div className={classes.root}>
       <AppBar position="static">
-        <Toolbar style={{ display: "flex", justifyContent: "space-between" }}>
-          <div style={{ display: "flex", alignItems: "center" }}>
+        <Toolbar className={classes.toolBar}>
+          <div className={classes.logoContainer}>
             <IconButton
               color="inherit"
               aria-label="open drawer"
@@ -41,7 +41,7 @@ export default function ResponsiveDrawer() {
             >
               <MdMenu />
             </IconButton>
-            <Link to="/" style={{ textDecoration: "none", color: "#ffff" }}>
+            <Link to="/" className={classes.logo}>
               <Typography variant="h6" noWrap>
                 MeAcha
               </Typography>

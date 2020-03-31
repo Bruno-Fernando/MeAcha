@@ -33,7 +33,8 @@ export default makeStyles(theme => ({
     alignItems: "center"
   },
   routesContainer: {
-    display: "flex"
+    display: "flex",
+    alignItems: "center"
   },
   item: {
     width: "auto"
