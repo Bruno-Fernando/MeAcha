@@ -1,22 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
 import Hidden from "@material-ui/core/Hidden";
 import IconButton from "@material-ui/core/IconButton";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import { MdSearch } from "react-icons/md";
 import InputBase from "@material-ui/core/InputBase";
-import { Avatar } from "@material-ui/core";
+import Avatar from "@material-ui/core/Avatar";
+
+import { MdSearch } from "react-icons/md";
 import {
   IoMdLogOut,
   IoMdAddCircleOutline,
   IoIosChatbubbles
 } from "react-icons/io";
+
 import useStyles from "./styles";
 
-function DeskNav() {
+export default function DeskNav() {
   const classes = useStyles();
 
   return (
@@ -69,7 +72,7 @@ function DeskNav() {
                 <ListItemText primary="Perfil" />
               </ListItem>
             </Link>
-            
+
             <ListItem button className={classes.item}>
               <ListItemIcon className={classes.itemIcon}>
                 <IoMdLogOut size="25px" />
@@ -82,5 +85,3 @@ function DeskNav() {
     </Hidden>
   );
 }
-
-export default DeskNav;
