@@ -10,7 +10,7 @@ import { MdSearch } from "react-icons/md";
 import InputBase from "@material-ui/core/InputBase";
 import { Avatar } from "@material-ui/core";
 import {
-  IoMdLogIn,
+  IoMdLogOut,
   IoMdAddCircleOutline,
   IoIosChatbubbles
 } from "react-icons/io";
@@ -43,17 +43,7 @@ function DeskNav() {
           </form>
 
           <List className={classes.routesContainer}>
-            <ListItem button className={classes.item}>
-              <ListItemIcon className={classes.itemIcon}>
-                <IoMdLogIn size="25px" />
-              </ListItemIcon>
-              <ListItemText primary="Logout" />
-            </ListItem>
-
-            <Link
-              to="/new/post"
-              className={classes.itemLink}
-            >
+            <Link to="/new/post" className={classes.itemLink}>
               <ListItem button className={classes.item}>
                 <ListItemIcon className={classes.itemIcon}>
                   <IoMdAddCircleOutline size="25px" />
@@ -79,6 +69,13 @@ function DeskNav() {
                 <ListItemText primary="Perfil" />
               </ListItem>
             </Link>
+            
+            <ListItem button className={classes.item}>
+              <ListItemIcon className={classes.itemIcon}>
+                <IoMdLogOut size="25px" />
+              </ListItemIcon>
+              <ListItemText primary="Logout" />
+            </ListItem>
           </List>
         </div>
       </div>

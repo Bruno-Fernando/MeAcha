@@ -1,26 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
-import Divider from "@material-ui/core/Divider";
 import Hidden from "@material-ui/core/Hidden";
 import IconButton from "@material-ui/core/IconButton";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import { MdMenu as MenuIcon } from "react-icons/md";
+import { MdMenu, MdSearch } from "react-icons/md";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme, fade } from "@material-ui/core/styles";
-import { MdSearch as SearchIcon } from "react-icons/md";
-import { FiFilter } from "react-icons/fi";
 import FilterMenu from "./../FilterMobile";
-import { IoMdLogIn } from "react-icons/io";
 
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
-import { Avatar, Grid } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 
 import DeskNav from "./../DeskNav";
+import SideMenu from "./../MobileNav";
 
 const drawerWidth = 240;
 
@@ -103,41 +96,11 @@ function ResponsiveDrawer() {
     setMobileOpen(!mobileOpen);
   };
 
-  const drawer = (
-    <div>
-      <div className={classes.toolbar} />
-      <Avatar />
-      <Divider />
-      <List>
-        <ListItem button>
-          <ListItemIcon>
-            <IoMdLogIn />
-          </ListItemIcon>
-          <ListItemText primary="Login" />
-        </ListItem>
-
-        <ListItem button>
-          <ListItemIcon>
-            <IoMdLogIn />
-          </ListItemIcon>
-          <ListItemText primary="Criar Post" />
-        </ListItem>
-
-        <ListItem button>
-          <ListItemIcon>
-            <IoMdLogIn />
-          </ListItemIcon>
-          <ListItemText primary="Chat" />
-        </ListItem>
-      </List>
-      <Divider />
-    </div>
-  );
-
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar style={{ display: "flex", justifyContent: "space-between" }}>
+          
           <div style={{ display: "flex", alignItems: "center" }}>
             <IconButton
               color="inherit"
@@ -146,7 +109,7 @@ function ResponsiveDrawer() {
               onClick={handleDrawerToggle}
               className={classes.menuButton}
             >
-              <MenuIcon />
+              <MdMenu />
             </IconButton>
             <Link to="/" style={{ textDecoration: "none", color: "#ffff" }}>
               <Typography variant="h6" noWrap>
@@ -156,29 +119,29 @@ function ResponsiveDrawer() {
           </div>
 
           <Hidden smUp implementation="css">
-            <Grid container >
+            <Grid container>
               <IconButton
                 type="submit"
                 className={classes.iconButton}
                 aria-label="search"
                 style={{ color: "#ffff" }}
               >
-                <SearchIcon />
+                <MdSearch />
               </IconButton>
               <FilterMenu />
             </Grid>
           </Hidden>
 
-          <Hidden xsDown implementation="css">
+          <Hidden xsDown implementation="js">
             <div className={classes.sectionDesktop}>
               <DeskNav />
             </div>
           </Hidden>
+
         </Toolbar>
       </AppBar>
       <nav>
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-        <Hidden smUp implementation="css">
+        <Hidden smUp implementation="js">
           <SwipeableDrawer
             variant="temporary"
             anchor={theme.direction === "rtl" ? "right" : "left"}
@@ -189,10 +152,10 @@ function ResponsiveDrawer() {
               paper: classes.drawerPaper
             }}
             ModalProps={{
-              keepMounted: true // Better open performance on mobile.
+              keepMounted: true
             }}
           >
-            {drawer}
+            <SideMenu />
           </SwipeableDrawer>
         </Hidden>
       </nav>
