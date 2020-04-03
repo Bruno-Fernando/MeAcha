@@ -14,9 +14,10 @@ import { MdMenu, MdSearch } from "react-icons/md";
 import { useTheme } from "@material-ui/core/styles";
 import useStyles from "./styles";
 
-import FilterMenu from "./../FilterMobile";
-import DeskNav from "./../DeskNav";
-import SideMenu from "./../MobileNav";
+import FilterMenu from "../FilterMobile";
+import DeskNav from "../DeskNav";
+import SideMenu from "../MobileSideMenu";
+import MobileNav from "../MobileNav";
 
 export default function ResponsiveDrawer() {
   const classes = useStyles();
@@ -31,39 +32,8 @@ export default function ResponsiveDrawer() {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar className={classes.toolBar}>
-          <div className={classes.logoContainer}>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              edge="start"
-              onClick={handleDrawerToggle}
-              className={classes.menuButton}
-            >
-              <MdMenu />
-            </IconButton>
-            <Link to="/" className={classes.logo}>
-              <Typography variant="h6" noWrap>
-                MeAcha
-              </Typography>
-            </Link>
-          </div>
-
-          <Hidden smUp implementation="css">
-            <Grid container>
-              <IconButton
-                type="submit"
-                aria-label="search"
-                style={{ color: "#ffff" }}
-              >
-                <MdSearch />
-              </IconButton>
-              <FilterMenu />
-            </Grid>
-          </Hidden>
-
-          <Hidden xsDown implementation="js">
-            <DeskNav />
-          </Hidden>
+          <MobileNav handleDrawerToggle={handleDrawerToggle} />
+          <DeskNav />
         </Toolbar>
       </AppBar>
       <nav>

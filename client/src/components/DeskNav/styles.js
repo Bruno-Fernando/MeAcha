@@ -50,5 +50,9 @@ export default makeStyles(theme => ({
   perfilAvatar: {
     width: "25px",
     height: "25px"
+  },
+  logo: {
+    textDecoration: "none",
+    color: "#ffff"
   }
 }));

@@ -9,6 +9,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InputBase from "@material-ui/core/InputBase";
 import Avatar from "@material-ui/core/Avatar";
+import Typography from "@material-ui/core/Typography";
 
 import { MdSearch } from "react-icons/md";
 import {
@@ -23,8 +24,15 @@ export default function DeskNav() {
   const classes = useStyles();
 
   return (
-    <Hidden xsDown implementation="css">
-      <div className={classes.sectionDesktop}>
+    <>
+      <Hidden xsDown implementation="js">
+        <Link to="/" className={classes.logo}>
+          <Typography variant="h6" noWrap>
+            MeAcha
+          </Typography>
+        </Link>
+      </Hidden>
+      <Hidden xsDown implementation="js">
         <div className={classes.menuContainer}>
           <form className={classes.search} onSubmit={e => e.preventDefault()}>
             <InputBase
@@ -81,7 +89,7 @@ export default function DeskNav() {
             </ListItem>
           </List>
         </div>
-      </div>
-    </Hidden>
+      </Hidden>
+    </>
   );
 }

@@ -1,23 +1,28 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 export default makeStyles(theme => ({
-  toolbar: theme.mixins.toolbar,
-  menu: {
+  root: {
+    display: "flex"
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.up("sm")]: {
+      display: "none"
+    }
+  },
+  drawerPaper: {
+    width: 240
+  },
+  toolBar: {
     display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    alignContent: "center"
+    justifyContent: "space-between"
   },
-  avatar: {
-    paddingTop: "30px",
-    paddingBottom: "30px"
+  logoContainer: {
+    display: "flex",
+    alignItems: "center"
   },
-  perfilAvatar: {
-    width: "50px",
-    height: "50px"
-  },
-  itemLink: {
+  logo: {
     textDecoration: "none",
-    color: "#212F3C"
-  },
+    color: "#ffff"
+  }
 }));
