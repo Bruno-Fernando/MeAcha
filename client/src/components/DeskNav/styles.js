@@ -3,6 +3,8 @@ import { makeStyles, fade } from "@material-ui/core/styles";
 export default makeStyles(theme => ({
   search: {
     position: "relative",
+    display: "flex",
+    justifyContent: "space-between",
     borderRadius: theme.shape.borderRadius,
     backgroundColor: fade(theme.palette.common.white, 0.15),
     "&:hover": {
