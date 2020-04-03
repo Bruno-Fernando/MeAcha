@@ -1,9 +1,9 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 
-import Home from "./Home";
-import Search from "./Search";
-import Back from "./Back";
+import Home from "../Home";
+import Search from "../Search";
+import Back from "../Back";
 
 export default function MobileNav({ handleDrawerToggle }) {
   return (
