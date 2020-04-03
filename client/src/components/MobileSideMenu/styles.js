@@ -20,4 +20,7 @@ export default makeStyles(theme => ({
     textDecoration: "none",
     color: "#212F3C"
   },
+  drawerPaper: {
+    width: 240
+  },
 }));

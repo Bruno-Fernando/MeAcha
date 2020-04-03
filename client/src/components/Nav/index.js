@@ -1,11 +1,8 @@
 import React from "react";
 
 import AppBar from "@material-ui/core/AppBar";
-import Hidden from "@material-ui/core/Hidden";
 import Toolbar from "@material-ui/core/Toolbar";
-import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 
-import { useTheme } from "@material-ui/core/styles";
 import useStyles from "./styles";
 
 import DeskNav from "../DeskNav";
@@ -14,7 +11,6 @@ import MobileNav from "../MobileNav";
 
 export default function ResponsiveDrawer() {
   const classes = useStyles();
-  const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
@@ -30,23 +26,7 @@ export default function ResponsiveDrawer() {
         </Toolbar>
       </AppBar>
       <nav>
-        <Hidden smUp implementation="js">
-          <SwipeableDrawer
-            variant="temporary"
-            anchor={theme.direction === "rtl" ? "right" : "left"}
-            open={mobileOpen}
-            onClose={handleDrawerToggle}
-            onOpen={handleDrawerToggle}
-            classes={{
-              paper: classes.drawerPaper
-            }}
-            ModalProps={{
-              keepMounted: true
-            }}
-          >
-            <SideMenu />
-          </SwipeableDrawer>
-        </Hidden>
+        <SideMenu mobileOpen={mobileOpen} handleDrawerToggle={handleDrawerToggle} />
       </nav>
     </div>
   );

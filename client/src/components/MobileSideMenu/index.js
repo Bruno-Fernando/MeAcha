@@ -8,6 +8,8 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
+import Hidden from "@material-ui/core/Hidden";
+import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 
 import {
   IoMdLogOut,
@@ -15,52 +17,68 @@ import {
   IoIosChatbubbles
 } from "react-icons/io";
 
+import { useTheme } from "@material-ui/core/styles";
 import useStyles from "./styles";
 
-export default function MobileSideMenu() {
+export default function MobileSideMenu({ mobileOpen, handleDrawerToggle }) {
   const classes = useStyles();
+  const theme = useTheme();
 
   return (
-    <Grid>
-      <Grid
-        container
-        justify="center"
-        alignItems="center"
-        className={classes.avatar}
+    <Hidden smUp implementation="js">
+      <SwipeableDrawer
+        variant="temporary"
+        anchor={theme.direction === "rtl" ? "right" : "left"}
+        open={mobileOpen}
+        onClose={handleDrawerToggle}
+        onOpen={handleDrawerToggle}
+        classes={{
+          paper: classes.drawerPaper
+        }}
+        ModalProps={{
+          keepMounted: true
+        }}
       >
-        <Link to="/user" className={classes.itemLink}>
-          <Avatar className={classes.perfilAvatar} />
-        </Link>
-      </Grid>
+        <Grid
+          container
+          justify="center"
+          alignItems="center"
+          className={classes.avatar}
+        >
+          <Link to="/user" className={classes.itemLink}>
+            <Avatar className={classes.perfilAvatar} />
+          </Link>
+        </Grid>
 
-      <Divider />
-      <List>
-        <Link to="new/post" className={classes.itemLink}>
+        <Divider />
+        <List>
+          <Link to="new/post" className={classes.itemLink}>
+            <ListItem button>
+              <ListItemIcon>
+                <IoMdAddCircleOutline size="20px" />
+              </ListItemIcon>
+              <ListItemText primary="Criar Post" />
+            </ListItem>
+          </Link>
+
+          <Link to="/chat" className={classes.itemLink}>
+            <ListItem button>
+              <ListItemIcon>
+                <IoIosChatbubbles size="20px" />
+              </ListItemIcon>
+              <ListItemText primary="Chat" />
+            </ListItem>
+          </Link>
+
           <ListItem button>
             <ListItemIcon>
-              <IoMdAddCircleOutline size="20px" />
+              <IoMdLogOut size="20px" />
             </ListItemIcon>
-            <ListItemText primary="Criar Post" />
+            <ListItemText primary="Logout" />
           </ListItem>
-        </Link>
-
-        <Link to="/chat" className={classes.itemLink}>
-          <ListItem button>
-            <ListItemIcon>
-              <IoIosChatbubbles size="20px" />
-            </ListItemIcon>
-            <ListItemText primary="Chat" />
-          </ListItem>
-        </Link>
-
-        <ListItem button>
-          <ListItemIcon>
-            <IoMdLogOut size="20px" />
-          </ListItemIcon>
-          <ListItemText primary="Logout" />
-        </ListItem>
-      </List>
-      <Divider />
-    </Grid>
+        </List>
+        <Divider />
+      </SwipeableDrawer>
+    </Hidden>
   );
 }
