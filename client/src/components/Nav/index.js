@@ -1,20 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 import AppBar from "@material-ui/core/AppBar";
 import Hidden from "@material-ui/core/Hidden";
-import IconButton from "@material-ui/core/IconButton";
 import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
-import Grid from "@material-ui/core/Grid";
-
-import { MdMenu, MdSearch } from "react-icons/md";
 
 import { useTheme } from "@material-ui/core/styles";
 import useStyles from "./styles";
 
-import FilterMenu from "../FilterMobile";
 import DeskNav from "../DeskNav";
 import SideMenu from "../MobileSideMenu";
 import MobileNav from "../MobileNav";
