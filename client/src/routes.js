@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Nav from "./components/Nav";
 import Register from "./components/Register";
 import Login from "./components/Login";
+import NewPost from "./components/NewPost";
 
 export default function Routes() {
   return (
@@ -16,6 +17,10 @@ export default function Routes() {
 
         <Route path="/login">
           <Login />
+        </Route>
+
+        <Route path="/new/post">
+          <NewPost />
         </Route>
       </Switch>
     </Router>

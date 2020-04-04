@@ -70,7 +70,6 @@ export default function Register() {
           inputRef={register(userName)}
           error={errors.name ? true : false}
           helperText={errors.name ? errors.name.message : ""}
-          size="normal"
         />
 
         <TextField
