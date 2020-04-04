@@ -17,15 +17,6 @@ import { IoMdLogIn } from "react-icons/io";
 
 import useStyles from "./styles";
 
-const userName = {
-  required: { value: true, message: "Informe seu nome" },
-  minLength: { value: 4, message: "Mínimo de 4 caracteres" },
-  maxLength: { value: 20, message: "Máximo de 20 caracteres" },
-  pattern: {
-    value: /^[^$&{|]*$/i,
-    message: "Não pode conter os caracteres: [ ^ $ & { | ] * $ ",
-  },
-};
 const userEmail = {
   required: { value: true, message: "Informe seu Email" },
   pattern: { value: /^\S+@\S+$/i, message: "Insira um Email válido" },
@@ -41,21 +32,21 @@ const userPassword = {
   },
 };
 
-export default function Register() {
+export default function Login() {
   const classes = useStyles();
   const { register, handleSubmit, errors } = useForm({ mode: "onBlur" });
   const [showPassword, setShowPassword] = React.useState(false);
-
-  const handleShowPassword = (e) => {
-    setShowPassword(!showPassword);
-  };
 
   const onSubmit = (e) => {
     console.log(e);
   };
 
+  const handleShowPassword = (e) => {
+    setShowPassword(!showPassword);
+  };
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} styles={{ width: "20px" }}>
       <Grid
         container
         direction="column"
@@ -64,22 +55,13 @@ export default function Register() {
         className={classes.gridContainer}
       >
         <TextField
-          label="Nome *"
-          name="name"
-          variant="outlined"
-          inputRef={register(userName)}
-          error={errors.name ? true : false}
-          helperText={errors.name ? errors.name.message : ""}
-          size="normal"
-        />
-
-        <TextField
           label="Email *"
           name="email"
           variant="outlined"
           inputRef={register(userEmail)}
           error={errors.email ? true : false}
           helperText={errors.email ? errors.email.message : ""}
+          styles={{ width: "20px", height: "220px" }}
         />
 
         <FormControl variant="outlined">
@@ -110,12 +92,12 @@ export default function Register() {
         </FormControl>
 
         <Button variant="contained" disableElevation type="submit">
-          Cadastrar
+          Entrar
         </Button>
 
-        <Link className={classes.registerLink} to="/login">
+        <Link className={classes.registerLink} to="/register">
           <IoMdLogIn size={16} />
-          Já tenho cadastro
+          Não tenho cadastro
         </Link>
       </Grid>
     </form>
