@@ -28,7 +28,7 @@ const userName = {
 };
 const userEmail = {
   required: { value: true, message: "Informe seu Email" },
-  pattern: { value: /^\S+@\S+$/i, message: "Insira um Email válido" },
+  pattern: { value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i, message: "Insira um Email válido" },
   maxLenght: { value: 35, message: "Email muito grande" },
 };
 const userPassword = {
