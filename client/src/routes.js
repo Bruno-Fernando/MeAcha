@@ -5,6 +5,7 @@ import Nav from "./components/Nav";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import NewPost from "./components/NewPost";
+import Profile from "./components/Profile";
 
 export default function Routes() {
   return (
@@ -21,6 +22,10 @@ export default function Routes() {
 
         <Route path="/new/post">
           <NewPost />
+        </Route>
+
+        <Route path="/profile/:id">
+          <Profile />
         </Route>
       </Switch>
     </Router>
