@@ -9,7 +9,7 @@ import useStyle from "./styles";
 
 import { MdMenu, MdSearch } from "react-icons/md";
 
-import FilterMenu from "../FilterMobile";
+import FilterMenu from "../MobileFilter";
 
 export default function Home({ handleDrawerToggle }) {
   const classes = useStyle();

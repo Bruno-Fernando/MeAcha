@@ -18,8 +18,8 @@ export default function ResponsiveDrawer() {
   };
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static">
+    <>
+      <AppBar position="sticky">
         <Toolbar className={classes.toolBar}>
           <MobileNav handleDrawerToggle={handleDrawerToggle} />
           <DeskNav />
@@ -28,6 +28,6 @@ export default function ResponsiveDrawer() {
       <nav>
         <SideMenu mobileOpen={mobileOpen} handleDrawerToggle={handleDrawerToggle} />
       </nav>
-    </div>
+    </>
   );
 }
