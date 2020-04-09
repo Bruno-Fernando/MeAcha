@@ -6,7 +6,7 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import NewPost from "./components/NewPost";
 import Profile from "./components/Profile";
-import Post from "./components/Post";
+import Feed from "./components/Feed";
 
 export default function Routes() {
   return (
@@ -30,7 +30,7 @@ export default function Routes() {
         </Route>
 
         <Route path="/" exact>
-          <Post />
+          <Feed />
         </Route>
 
       </Switch>
