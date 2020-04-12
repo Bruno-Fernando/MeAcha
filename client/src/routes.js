@@ -7,6 +7,7 @@ import Login from "./components/Login";
 import NewPost from "./components/NewPost";
 import Profile from "./components/Profile";
 import Feed from "./components/Feed";
+import Post from "./components/Post";
 
 export default function Routes() {
   return (
@@ -28,6 +29,10 @@ export default function Routes() {
         <Route path="/profile/:id">
           <Profile />
         </Route>
+
+        <Router path="/post/:id">
+          <Post />
+        </Router>
 
         <Route path="/" exact>
           <Feed />
