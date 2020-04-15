@@ -28,7 +28,10 @@ const userName = {
 };
 const userEmail = {
   required: { value: true, message: "Informe seu Email" },
-  pattern: { value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i, message: "Insira um Email válido" },
+  pattern: {
+    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+    message: "Insira um Email válido",
+  },
   maxLenght: { value: 35, message: "Email muito grande" },
 };
 const userPassword = {
@@ -55,11 +58,11 @@ export default function Register() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} className={classes.formContainer}>
       <Grid
         container
         direction="column"
-        justify="space-evenly"
+        justify="center"
         alignItems="center"
         className={classes.gridContainer}
       >
@@ -70,6 +73,7 @@ export default function Register() {
           inputRef={register(userName)}
           error={errors.name ? true : false}
           helperText={errors.name ? errors.name.message : ""}
+          className={classes.gridInput}
         />
 
         <TextField
@@ -79,9 +83,10 @@ export default function Register() {
           inputRef={register(userEmail)}
           error={errors.email ? true : false}
           helperText={errors.email ? errors.email.message : ""}
+          className={classes.gridInput}
         />
 
-        <FormControl variant="outlined">
+        <FormControl variant="outlined" className={classes.gridInput}>
           <InputLabel htmlFor="password">Senha *</InputLabel>
           <OutlinedInput
             id="password"
@@ -108,7 +113,12 @@ export default function Register() {
           </FormHelperText>
         </FormControl>
 
-        <Button variant="contained" disableElevation type="submit">
+        <Button
+          variant="contained"
+          disableElevation
+          type="submit"
+          className={classes.submitBtn}
+        >
           Cadastrar
         </Button>
 

@@ -19,7 +19,10 @@ import useStyles from "./styles";
 
 const userEmail = {
   required: { value: true, message: "Informe seu Email" },
-  pattern: { value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i, message: "Insira um Email válido" },
+  pattern: {
+    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+    message: "Insira um Email válido",
+  },
   maxLenght: { value: 35, message: "Email muito grande" },
 };
 const userPassword = {
@@ -46,11 +49,11 @@ export default function Login() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} styles={{ width: "20px" }}>
+    <form onSubmit={handleSubmit(onSubmit)} className={classes.formContainer}>
       <Grid
         container
         direction="column"
-        justify="space-evenly"
+        justify="center"
         alignItems="center"
         className={classes.gridContainer}
       >
@@ -61,10 +64,10 @@ export default function Login() {
           inputRef={register(userEmail)}
           error={errors.email ? true : false}
           helperText={errors.email ? errors.email.message : ""}
-          styles={{ width: "20px", height: "220px" }}
+          className={classes.gridInput}
         />
 
-        <FormControl variant="outlined">
+        <FormControl variant="outlined" className={classes.gridInput}>
           <InputLabel htmlFor="password">Senha *</InputLabel>
           <OutlinedInput
             id="password"
@@ -91,7 +94,7 @@ export default function Login() {
           </FormHelperText>
         </FormControl>
 
-        <Button variant="contained" disableElevation type="submit">
+        <Button variant="contained" disableElevation type="submit" className={classes.submitBtn}>
           Entrar
         </Button>
 
