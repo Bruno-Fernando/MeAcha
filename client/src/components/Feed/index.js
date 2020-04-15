@@ -3,7 +3,7 @@ import React from "react";
 import Grid from "@material-ui/core/Grid";
 
 import MobilePost from "../MobilePost";
-import DeskPost from "../PostCard";
+import PostCard from "../PostCard";
 
 export default function Post() {
 
@@ -47,7 +47,7 @@ export default function Post() {
 
   return (
     <Grid container direction="column" alignItems="center">
-      {posts.map(post => <DeskPost post={post} key={post.id} />)}
+      {posts.map(post => <PostCard post={post} key={post.id} />)}
     </Grid>
   );
 }
