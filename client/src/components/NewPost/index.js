@@ -40,18 +40,18 @@ export default function Register() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} className={classes.formContainer} >
       <Grid
         container
         direction="column"
-        justify="space-evenly"
+        justify="center"
         alignItems="center"
         className={classes.gridContainer}
       >
         <FormControl
           error={errors.category ? true : false}
           variant="outlined"
-          style={{ width: "25%" }}
+          className={classes.gridInput}
         >
           <InputLabel htmlFor="category">Categoria</InputLabel>
           <Controller
@@ -78,6 +78,7 @@ export default function Register() {
           inputRef={register(postTitle)}
           error={errors.title ? true : false}
           helperText={errors.title ? errors.title.message : ""}
+          className={classes.gridInput}
         />
 
         <TextField
@@ -89,9 +90,10 @@ export default function Register() {
           inputRef={register(postDescription)}
           error={errors.description ? true : false}
           helperText={errors.description ? errors.description.message : ""}
+          className={classes.gridInput}
         />
 
-        <Button variant="contained" disableElevation type="submit">
+        <Button variant="contained" disableElevation type="submit" className={classes.submitBtn}>
           Postar
         </Button>
       </Grid>
