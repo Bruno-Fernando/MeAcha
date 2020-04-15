@@ -2,7 +2,6 @@ import React from "react";
 
 import Grid from "@material-ui/core/Grid";
 
-import MobilePost from "../MobilePost";
 import PostCard from "../PostCard";
 
 export default function Post() {
