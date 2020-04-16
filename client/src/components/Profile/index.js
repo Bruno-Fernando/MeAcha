@@ -61,23 +61,31 @@ export default function Profile() {
     },
   ];
   return (
-    <div className={classes.container}>
-      <Grid container direction="column" justify="center" alignItems="center">
-        <Avatar className={classes.avatar} />
+    <>
+      <div className={classes.container}>
+        <Grid
+          container
+          direction="column"
+          justify="center"
+          alignItems="center"
+          className={classes.userInfo}
+        >
+          <Avatar className={classes.avatar} />
 
-        <Typography variant={"h6"}>{user.name}</Typography>
+          <Typography variant={"h6"}>{user.name}</Typography>
 
-        <Typography variant={"body1"}>{user.email}</Typography>
-      </Grid>
+          <Typography variant={"body1"}>{user.email}</Typography>
+        </Grid>
 
-      <Divider className={classes.divider} />
+        {/* <Divider className={classes.divider} /> */}
 
-      <Grid container direction="column" alignItems="center">
-        {posts.map((post) => (
-          <PostCard post={post} key={post.id} />
-        ))}
-      </Grid>
-    </div>
+        <div className={classes.userPosts}>
+          {posts.map((post) => (
+            <PostCard post={post} key={post.id} />
+          ))}
+        </div>
+      </div>
+    </>
   );
 }
 

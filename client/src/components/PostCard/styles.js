@@ -2,9 +2,10 @@ import { makeStyles } from "@material-ui/core/styles";
 
 export default makeStyles(({ breakpoints, theme }) => ({
   root: {
-    borderRadius: 16, // 16px
+    borderRadius: 8,
     transition: "0.3s",
     boxShadow: "0px 14px 80px rgba(34, 35, 58, 0.2)",
+    marginTop: "20px",
 
     textDecoration: "none",
 
@@ -14,26 +15,24 @@ export default makeStyles(({ breakpoints, theme }) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    paddingBottom: 20,
+
     [breakpoints.up("sm")]: {
       width: "70%",
       flexDirection: "row",
       alignItems: "flex-start",
-      paddingTop: 20,
     },
   },
-  lost:{
-    borderLeft: "3px solid red"
+  lost: {
+    borderLeft: "3px solid red",
   },
   found: {
-    borderLeft: "3px solid green"
+    borderLeft: "3px solid green",
   },
   media: {
-    width: "88%",
-    height: "50%",
+    width: "100%",
 
-    paddingBottom: "50%",
-    borderRadius: 16,
+    paddingBottom: "70%",
+    borderRadius: 8,
 
     backgroundColor: "#fff",
     position: "relative",

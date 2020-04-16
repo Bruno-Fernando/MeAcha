@@ -3,17 +3,25 @@ import { makeStyles } from "@material-ui/core/styles";
 export default makeStyles((theme) => ({
   container: {
     width: "100%",
+    height: "90vh",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    flexDirection: "column",
+    flexDirection: "row",
   },
-  gridContainer: {
-    width: "90vw",
-    height: "80vh",
-    [theme.breakpoints.up("sm")]: {
-      width: "50vh",
-    },
+  userInfo: {
+    width: "30vw",
+    
+  },
+  userPosts: {
+    height: "100%",
+    width: "70vw",
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    flexWrap: "wrap",
+    overflow: "scroll",
+    overflowX: "hidden"
   },
   gridInput: {
     width: "100%",
