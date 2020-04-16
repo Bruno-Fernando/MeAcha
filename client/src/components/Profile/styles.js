@@ -1,40 +1,40 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-export default makeStyles((theme) => ({
+export default makeStyles(({ breakpoints, theme }) => ({
   container: {
     width: "100%",
-    height: "90vh",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    flexDirection: "row",
+    flexDirection: "column",
+
+    [breakpoints.up("sm")]: {
+      height: "90vh",
+      flexDirection: "row",
+    },
   },
   userInfo: {
-    width: "30vw",
-    
+    [breakpoints.up("sm")]: {
+      width: "30vw",
+    },
   },
   userPosts: {
-    height: "100%",
-    width: "70vw",
+    width: "90vw",
+    
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "column",
     alignItems: "center",
-    flexWrap: "wrap",
-    overflow: "scroll",
-    overflowX: "hidden"
-  },
-  gridInput: {
-    width: "100%",
-    marginTop: "10px",
-  },
-  submitBtn: {
-    width: "80%",
-    marginTop: "20px",
-  },
-  registerLink: {
-    textDecoration: "none",
-    color: "black",
-    marginTop: "25px",
+
+    [breakpoints.up("sm")]: {
+      width: "70vw",
+      height: "100%",
+
+      flexDirection: "row",
+      flexWrap: "wrap",
+      
+      overflow: "scroll",
+      overflowX: "hidden",
+    },
   },
   avatar: {
     width: "150px",
@@ -43,5 +43,8 @@ export default makeStyles((theme) => ({
   },
   divider: {
     width: "100%",
+    [breakpoints.up("sm")]: {
+      display: "none"
+    },
   },
 }));

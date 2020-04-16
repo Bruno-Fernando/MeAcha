@@ -80,13 +80,13 @@ export default function Profile() {
           <Typography variant={"body1"}>{user.email}</Typography>
         </Grid>
 
-        {/* <Divider className={classes.divider} /> */}
+        <Divider className={classes.divider} />
 
         <div className={classes.userPosts}>
           {posts.map((post) => (
             <>
               <PostCard post={post} key={post.id} />
-              <IconButton aria-label="delete" >
+              <IconButton aria-label="delete">
                 <MdDelete />
               </IconButton>
             </>
