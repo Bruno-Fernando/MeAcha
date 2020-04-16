@@ -4,6 +4,9 @@ import Grid from "@material-ui/core/Grid";
 import Avatar from "@material-ui/core/Avatar";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
+import IconButton from "@material-ui/core/IconButton";
+
+import { MdDelete } from "react-icons/md";
 
 import PostCard from "../PostCard";
 
@@ -81,7 +84,12 @@ export default function Profile() {
 
         <div className={classes.userPosts}>
           {posts.map((post) => (
-            <PostCard post={post} key={post.id} />
+            <>
+              <PostCard post={post} key={post.id} />
+              <IconButton aria-label="delete" >
+                <MdDelete />
+              </IconButton>
+            </>
           ))}
         </div>
       </div>
