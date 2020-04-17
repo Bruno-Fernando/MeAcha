@@ -1,25 +1,26 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-export default makeStyles(theme => ({
+export default makeStyles((theme) => ({
   menuButton: {
     marginRight: theme.spacing(2),
     [theme.breakpoints.up("sm")]: {
-      display: "none"
-    }
+      display: "none",
+    },
   },
   drawerPaper: {
-    width: 240
+    width: 240,
   },
   toolBar: {
     display: "flex",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    background: theme.primaryColor
   },
   logoContainer: {
     display: "flex",
-    alignItems: "center"
+    alignItems: "center",
   },
   logo: {
     textDecoration: "none",
-    color: "#ffff"
-  }
+    color: "#ffff",
+  },
 }));

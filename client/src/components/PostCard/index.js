@@ -11,20 +11,19 @@ import Typography from "@material-ui/core/Typography";
 import useStyles from "./styles";
 
 export default function PostCard(props) {
-  const classes = useStyles();
+  const classes = useStyles(props.theme);
 
   const { id, type, mainImg, title, description } = props.post;
 
   return (
-    <Card
-      className={cx(
-        classes.root,
-        type === "lost" ? classes.lost : classes.found
-      )}
-      component={Link}
-      to={`post/${id}`}
-    >
-      <CardMedia className={classes.media} image={mainImg} />
+    <Card className={classes.root} component={Link} to={`post/${id}`}>
+      <CardMedia
+        className={cx(
+          classes.media,
+          type === "lost" ? classes.lost : classes.found
+        )}
+        image={mainImg}
+      />
 
       <CardContent>
         <Typography component="p">09/04</Typography>

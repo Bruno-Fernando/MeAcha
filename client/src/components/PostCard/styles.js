@@ -23,10 +23,10 @@ export default makeStyles(({ breakpoints, theme }) => ({
     },
   },
   lost: {
-    borderLeft: "3px solid red",
+    borderLeft: "5px solid #cb2d3e",
   },
   found: {
-    borderLeft: "3px solid green",
+    borderLeft: "5px solid #11998e",
   },
   media: {
     width: "100%",
