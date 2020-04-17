@@ -190,6 +190,3 @@ export default function NewPost() {
     </form>
   );
 }
-// } else {
-//   <></>;
-// }

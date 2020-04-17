@@ -11,8 +11,6 @@ function App() {
 
   const theme = createMuiTheme({
     primaryColor: "linear-gradient(to right, #6a11cb 0%, #2575fc 100%)",
-    lostColor: "#cb2d3e",
-    foundColor: "linear-gradient(-20deg, #00cdac 0%, #8ddad5 100%)"
   });
 
   return (
@@ -20,7 +18,6 @@ function App() {
       <CssBaseline />
       <ThemeProvider theme={theme} >
         <Routes />
-
       </ThemeProvider>
     </>
   );

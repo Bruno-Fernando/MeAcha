@@ -29,7 +29,7 @@ export default function Post() {
         </div>
       </Grid>
 
-      <Fab color="primary" aria-label="chat" className={classes.fab}>
+      <Fab aria-label="chat" className={classes.fab}>
         <IoIosChatbubbles />
       </Fab>
     </>

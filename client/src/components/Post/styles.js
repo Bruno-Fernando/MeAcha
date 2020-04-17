@@ -20,6 +20,12 @@ export default makeStyles((theme) => ({
     position: 'fixed',
     bottom: "5vw",
     right: "5vw",
+    background: theme.primaryColor,
+    color: "#fff",
+    transition: "filter 0.2s",
+    '&:hover': {
+      filter: "brightness(110%)",
+    }
   },
   gridContainer: {
     width: "90vw",
