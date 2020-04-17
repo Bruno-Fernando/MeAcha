@@ -28,19 +28,42 @@ const postDescription = {
     message: "Não pode conter os caracteres: [ ^ $ & { | ] * $ ",
   },
 };
+const foundPlace = {
+  required: { value: true, message: "Informe onde achou" },
+  minLength: { value: 4, message: "Mínimo de 4 caracteres" },
+  maxLength: { value: 280, message: "Máximo de 280 caracteres" },
+  pattern: {
+    value: /^[^$&{|]*$/i,
+    message: "Não pode conter os caracteres: [ ^ $ & { | ] * $ ",
+  },
+};
+const meetingPlace = {
+  maxLength: { value: 280, message: "Máximo de 280 caracteres" },
+  pattern: {
+    value: /^[^$&{|]*$/i,
+    message: "Não pode conter os caracteres: [ ^ $ & { | ] * $ ",
+  },
+};
+const lostPlace = {
+  maxLength: { value: 50, message: "Máximo de 50 caracteres" },
+  pattern: {
+    value: /^[^$&{|]*$/i,
+    message: "Não pode conter os caracteres: [ ^ $ & { | ] * $ ",
+  },
+};
 
-export default function Register() {
+export default function NewPost() {
   const classes = useStyles();
-  const { register, handleSubmit, errors, control } = useForm({
-    mode: "onBlur",
+  const { register, handleSubmit, errors, control, getValues } = useForm({
+    mode: "onChange",
   });
-
+  let { category } = getValues();
   const onSubmit = (e) => {
     console.log(e);
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={classes.formContainer} >
+    <form onSubmit={handleSubmit(onSubmit)} className={classes.formContainer}>
       <Grid
         container
         direction="column"
@@ -71,6 +94,68 @@ export default function Register() {
           </FormHelperText>
         </FormControl>
 
+        {(() => {
+          if (category === "found") {
+            return (
+              <>
+                <TextField
+                  label="Onde Achou"
+                  name="foundPlace"
+                  variant="outlined"
+                  inputRef={register(foundPlace)}
+                  error={errors.foundPlace ? true : false}
+                  helperText={
+                    errors.foundPlace ? errors.foundPlace.message : ""
+                  }
+                  className={classes.gridInput}
+                />
+
+                <TextField
+                  label="Lugar de Encontro"
+                  name="meetingPlace"
+                  variant="outlined"
+                  inputRef={register(meetingPlace)}
+                  error={errors.meetingPlace ? true : false}
+                  helperText={
+                    errors.meetingPlace ? errors.meetingPlace.message : ""
+                  }
+                  className={classes.gridInput}
+                />
+              </>
+            );
+          } else if (category === "lost") {
+            return (
+              <>
+                <TextField
+                  label="Onde perdeu"
+                  name="lostPlace"
+                  variant="outlined"
+                  inputRef={register(lostPlace)}
+                  error={errors.lostPlace ? true : false}
+                  helperText={errors.lostPlace ? errors.lostPlace.message : ""}
+                  className={classes.gridInput}
+                />
+
+                <TextField
+                  label="Recompensa"
+                  name="bounty"
+                  type="number"
+                  inputProps={{
+                    inputmode: "numeric",
+                    pattern: "[0-9]*",
+                    min: 0,
+                  }}
+                  variant="outlined"
+                  inputRef={register()}
+                  error={errors.bounty ? true : false}
+                  helperText={errors.bounty ? errors.bounty.message : ""}
+                  className={classes.gridInput}
+                />
+              </>
+            );
+          }
+        })()}
+
         <TextField
           label="Título *"
           name="title"
@@ -93,10 +178,18 @@ export default function Register() {
           className={classes.gridInput}
         />
 
-        <Button variant="contained" disableElevation type="submit" className={classes.submitBtn}>
+        <Button
+          variant="contained"
+          disableElevation
+          type="submit"
+          className={classes.submitBtn}
+        >
           Postar
         </Button>
       </Grid>
     </form>
   );
 }
+// } else {
+//   <></>;
+// }

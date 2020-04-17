@@ -20,5 +20,11 @@ export default makeStyles((theme) => ({
   submitBtn: {
     width: "80%",
     marginTop: "20px",
+    background: theme.primaryColor,
+    color: "#fff",
+    transition: "filter 0.2s",
+    '&:hover': {
+      filter: "brightness(110%)",
+    }
   },
 }));
