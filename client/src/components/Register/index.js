@@ -11,8 +11,9 @@ import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import FormHelperText from "@material-ui/core/FormHelperText";
+import Avatar from "@material-ui/core/Avatar";
 
-import { MdVisibility, MdVisibilityOff } from "react-icons/md";
+import { MdVisibility, MdVisibilityOff, MdPhotoCamera } from "react-icons/md";
 import { IoMdLogIn } from "react-icons/io";
 
 import useStyles from "./styles";
@@ -48,6 +49,7 @@ export default function Register() {
   const classes = useStyles();
   const { register, handleSubmit, errors } = useForm({ mode: "onBlur" });
   const [showPassword, setShowPassword] = React.useState(false);
+  const [photo, setPhoto] = React.useState(null);
 
   const handleShowPassword = (e) => {
     setShowPassword(!showPassword);
@@ -55,6 +57,10 @@ export default function Register() {
 
   const onSubmit = (e) => {
     console.log(e);
+  };
+
+  const handlePhotoUpload = (e) => {
+    setPhoto(URL.createObjectURL(e.target.files[0]));
   };
 
   return (
@@ -66,6 +72,27 @@ export default function Register() {
         alignItems="center"
         className={classes.gridContainer}
       >
+        <Grid>
+          <Avatar src={photo} className={classes.avatar} />
+
+          <input
+            accept="image/*"
+            className={classes.avatarImg}
+            id="icon-button-file"
+            type="file"
+            onChange={handlePhotoUpload}
+          />
+          <label htmlFor="icon-button-file">
+            <IconButton
+              color="primary"
+              aria-label="upload picture"
+              component="span"
+            >
+              <MdPhotoCamera />
+            </IconButton>
+          </label>
+        </Grid>
+
         <TextField
           label="Nome *"
           name="name"

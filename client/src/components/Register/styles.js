@@ -23,13 +23,20 @@ export default makeStyles((theme) => ({
     background: theme.primaryColor,
     color: "#fff",
     transition: "filter 0.2s",
-    '&:hover': {
+    "&:hover": {
       filter: "brightness(110%)",
-    }
+    },
   },
   registerLink: {
     textDecoration: "none",
     color: "black",
     marginTop: "25px",
+  },
+  avatar: {
+    width: "120px",
+    height: "120px",
+  },
+  avatarImg: {
+    display: "none",
   },
 }));
