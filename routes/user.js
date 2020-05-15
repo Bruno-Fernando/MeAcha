@@ -6,8 +6,8 @@ const router = express.Router();
 
 const User = require("../models/User");
 
-const multipartParser = require("../config/multipartParser");
-const profileImgUpload = require("../config/imgUpload");
+const multipartParser = require("../parser/multipartParser");
+const profileImgUpload = require("../middlewares/imgUpload");
 const userValidation = require("../middlewares/userValidation");
 const authValidation = require("../middlewares/authValidation");
 const userUpdateValidation = require("../middlewares/userUpdateValidation");
