@@ -1,6 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+
+import api from "../../services/api";
 
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
@@ -47,24 +49,47 @@ const userPassword = {
 
 export default function Register() {
   const classes = useStyles();
-  const { register, handleSubmit, errors } = useForm({ mode: "onBlur" });
   const [showPassword, setShowPassword] = React.useState(false);
-  const [photo, setPhoto] = React.useState(null);
+
+  const { register, handleSubmit, errors } = useForm({ mode: "onBlur" });
+  const [photo, setPhoto] = React.useState({file: null, preview: null});
+
+  const history = useHistory();
 
   const handleShowPassword = (e) => {
     setShowPassword(!showPassword);
   };
 
-  const onSubmit = (e) => {
-    console.log(e);
+  const handleRegister = async (userData) => {
+    const data = new FormData();
+    data.append("name", userData.name);
+    data.append("email", userData.email);
+    data.append("password", userData.password);
+    data.append("profileImg", photo.file);
+    
+    try {
+      const response = await api.post("/user/register", data);
+      console.log(response);
+      history.push("/");
+
+    } catch (error) {
+      console.log(error.response);
+    }
+    
   };
 
-  const handlePhotoUpload = (e) => {
-    setPhoto(URL.createObjectURL(e.target.files[0]));
+  const handlePhotoUpload = (file) => {
+    
+    const image = {
+      file: file.target.files[0] || null,
+      preview: URL.createObjectURL(file.target.files[0]) || null
+    }
+    
+    setPhoto(image);
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={classes.formContainer}>
+    <form onSubmit={handleSubmit(handleRegister)} className={classes.formContainer}>
       <Grid
         container
         direction="column"
@@ -73,10 +98,10 @@ export default function Register() {
         className={classes.gridContainer}
       >
         <Grid>
-          <Avatar src={photo} className={classes.avatar} />
+          <Avatar src={photo.preview} className={classes.avatar} />
 
           <input
-            accept="image/*"
+            accept="image/png, image/jpeg, image/jpg"
             className={classes.avatarImg}
             id="icon-button-file"
             type="file"
