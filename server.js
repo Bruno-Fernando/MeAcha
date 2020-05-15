@@ -1,7 +1,7 @@
 const express = require("express");
-const mongoose = require("mongoose");
-
+const cors = require("cors");
 const connectDB = require("./config/db");
+
 connectDB();
 
 const post = require("./routes/post");
@@ -11,8 +11,9 @@ const user = require("./routes/user");
 const auth = require("./routes/auth");
 
 const app = express();
-
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cors()); //alterar para que apenas dominios restritos possam acessar
 
 // GET login
 

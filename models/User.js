@@ -14,9 +14,11 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    userPostIds: [String]
+    userPostIds: [String],
+    profileImg: {
+        type: String,
+        required: false
+    }
 });
-
-// TODO adicionar imagem de perfil do usuario
 
 module.exports = mongoose.model('User', UserSchema);
