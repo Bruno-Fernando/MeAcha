@@ -1,27 +1,50 @@
 const Busboy = require("busboy");
 
 const multipartParser = (req, res, next) => {
-  const busboy = new Busboy({ headers: req.headers });
+  const busboy = new Busboy({
+    headers: req.headers,
+    limits: { fileSize: 3 * 1024 * 1024 },
+  });
+  const acceptedMimetypes = ["image/png", "image/jpeg", "image/jpg"];
+
   let body = {};
   let profileImg = {};
 
   busboy.on("file", function (fieldname, file, filename, encoding, mimetype) {
     let imgData = [];
 
+    if(acceptedMimetypes.indexOf(mimetype) == -1) {
+      file.resume();
+
+      profileImg = {
+        err: `Not accepted image type ${mimetype}`
+      }
+    }
+
     file.on("data", (data) => {
       imgData.push(data);
     });
 
-    file.on("end", () => {
-      const buff = Buffer.concat(imgData);
+    file.on("limit", () => {
+      imgData = [];
+    });
 
-      profileImg = {
-        fieldname,
-        imagebuffer: buff,
-        filename,
-        encoding,
-        mimetype,
-      };
+    file.on("end", () => {
+      if(imgData.length) {
+        const buff = Buffer.concat(imgData);
+  
+        profileImg = {
+          fieldname,
+          imagebuffer: buff,
+          filename,
+          encoding,
+          mimetype,
+        };
+      } else {
+        profileImg = {
+          err: "Too large profile image"
+        }
+      }
     });
   });
 
