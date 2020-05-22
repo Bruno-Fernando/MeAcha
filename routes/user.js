@@ -2,7 +2,7 @@ const express = require("express");
 const fs = require("fs");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const jwtSecret = require("../config/jwtsecret");
+const TOKEN_SECRET = require("../config/jwtsecret");
 
 const router = express.Router();
 
@@ -44,7 +44,7 @@ router.post(
           error: "Server save error",
         });
       }
-      jwt.sign({ token: createdUser._id }, jwtSecret, (err, token) => {
+      jwt.sign({ token: createdUser._id }, TOKEN_SECRET, (err, token) => {
         // TODO validacao por email
         return res.status(201).json({
           success: true,

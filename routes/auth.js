@@ -11,12 +11,12 @@ router.post("/login", loginValidation, (req, res) => {
     if (err) {
       return res.status(500).json({
         success: false,
-        error: "Server error"
+        error: "Server error",
       });
     } else if (!user) {
       return res.status(400).json({
         success: false,
-        error: "Email is not found"
+        error: "Email is not found",
       });
     } else {
       const validPass = await bcrypt.compare(req.body.password, user.password);
@@ -24,13 +24,16 @@ router.post("/login", loginValidation, (req, res) => {
       if (!validPass) {
         return res.status(400).json({
           success: false,
-          error: "Invalid password"
+          error: "Invalid password",
         });
       }
 
-      const token = jwt.sign({ _id: user._id }, TOKEN_SECRET);
-
-      return res.header("auth-token", token);
+      jwt.sign({ token: user._id }, TOKEN_SECRET, (err, token) => {
+        return res.json({
+          success: true,
+          token,
+        });
+      });
     }
   });
 });
