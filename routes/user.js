@@ -1,6 +1,8 @@
 const express = require("express");
 const fs = require("fs");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const jwtSecret = require("../config/jwtsecret");
 
 const router = express.Router();
 
@@ -20,7 +22,6 @@ router.post(
   userExistsValidation,
   profileImgUpload,
   async (req, res) => {
-
     const { name, email, password } = req.body;
 
     const salt = await bcrypt.genSalt(12);
@@ -30,7 +31,7 @@ router.post(
       name,
       email,
       password: hashedPassword,
-      profileImg: req.file.path,   
+      profileImg: req.file.path,
     });
 
     User.create(newUser, (err, createdUser) => {
@@ -43,9 +44,12 @@ router.post(
           error: "Server save error",
         });
       }
-      // TODO validacao por email
-      return res.status(201).json({
-        success: true,
+      jwt.sign({ token: createdUser._id }, jwtSecret, (err, token) => {
+        // TODO validacao por email
+        return res.status(201).json({
+          success: true,
+          token,
+        });
       });
     });
   }
