@@ -52,7 +52,7 @@ export default function Register() {
   const [showPassword, setShowPassword] = React.useState(false);
 
   const { register, handleSubmit, errors } = useForm({ mode: "onBlur" });
-  const [photo, setPhoto] = React.useState({file: null, preview: null});
+  const [photo, setPhoto] = React.useState({ file: null, preview: null });
 
   const history = useHistory();
 
@@ -66,30 +66,31 @@ export default function Register() {
     data.append("email", userData.email);
     data.append("password", userData.password);
     data.append("profileImg", photo.file);
-    
+
     try {
       const response = await api.post("/user/register", data);
-      console.log(response);
-      history.push("/");
+      localStorage.setItem("token", response.data.token);
 
+      history.push("/");
     } catch (error) {
       console.log(error.response);
     }
-    
   };
 
   const handlePhotoUpload = (file) => {
-    
     const image = {
       file: file.target.files[0] || null,
-      preview: URL.createObjectURL(file.target.files[0]) || null
-    }
-    
+      preview: URL.createObjectURL(file.target.files[0]) || null,
+    };
+
     setPhoto(image);
   };
 
   return (
-    <form onSubmit={handleSubmit(handleRegister)} className={classes.formContainer}>
+    <form
+      onSubmit={handleSubmit(handleRegister)}
+      className={classes.formContainer}
+    >
       <Grid
         container
         direction="column"
