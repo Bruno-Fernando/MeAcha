@@ -1,6 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+
+import api from "../../services/api";
 
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
@@ -37,11 +39,24 @@ const userPassword = {
 
 export default function Login() {
   const classes = useStyles();
+  const history = useHistory();
   const { register, handleSubmit, errors } = useForm({ mode: "onBlur" });
   const [showPassword, setShowPassword] = React.useState(false);
 
-  const onSubmit = (e) => {
-    console.log(e);
+  const onSubmit = async (userInput) => {
+    const data = {
+      email: userInput.email,
+      password: userInput.password,
+    };
+
+    try {
+      const response = await api.post("/auth/login", data);
+      localStorage.setItem("token", response.data.token);
+
+      history.push("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleShowPassword = (e) => {
@@ -94,7 +109,12 @@ export default function Login() {
           </FormHelperText>
         </FormControl>
 
-        <Button variant="contained" disableElevation type="submit" className={classes.submitBtn}>
+        <Button
+          variant="contained"
+          disableElevation
+          type="submit"
+          className={classes.submitBtn}
+        >
           Entrar
         </Button>
 
