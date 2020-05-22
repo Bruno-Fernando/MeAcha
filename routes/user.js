@@ -31,7 +31,7 @@ router.post(
       name,
       email,
       password: hashedPassword,
-      profileImg: req.file.path,
+      profileImg: req.file.path || "",
     });
 
     User.create(newUser, (err, createdUser) => {

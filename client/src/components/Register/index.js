@@ -65,7 +65,9 @@ export default function Register() {
     data.append("name", userData.name);
     data.append("email", userData.email);
     data.append("password", userData.password);
-    data.append("profileImg", photo.file);
+    if(photo.file){
+      data.append("profileImg", photo.file);
+    }
 
     try {
       const response = await api.post("/user/register", data);
