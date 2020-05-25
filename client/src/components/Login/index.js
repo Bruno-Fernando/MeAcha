@@ -54,6 +54,7 @@ export default function Login() {
       localStorage.setItem("token", response.data.token);
 
       history.push("/");
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }

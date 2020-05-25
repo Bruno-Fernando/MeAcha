@@ -74,6 +74,7 @@ export default function Register() {
       localStorage.setItem("token", response.data.token);
 
       history.push("/");
+      window.location.reload();
     } catch (error) {
       console.log(error.response);
     }
