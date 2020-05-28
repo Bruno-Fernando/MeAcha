@@ -14,7 +14,8 @@ import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import {
   IoMdLogOut,
   IoMdAddCircleOutline,
-  IoIosChatbubbles
+  IoIosChatbubbles,
+  IoMdLogIn,
 } from "react-icons/io";
 
 import { useTheme } from "@material-ui/core/styles";
@@ -23,6 +24,97 @@ import useStyles from "./styles";
 export default function MobileSideMenu({ mobileOpen, handleDrawerToggle }) {
   const classes = useStyles();
   const theme = useTheme();
+
+  const [loged, setLoged] = React.useState(localStorage.getItem("token"));
+
+  const logOff = () => {
+    localStorage.removeItem("token");
+    setLoged(null);
+  };
+
+  const logedIn = (
+    <>
+      <Grid
+        container
+        justify="center"
+        alignItems="center"
+        className={classes.avatar}
+        onClick={handleDrawerToggle}
+      >
+        <Link to="/user" className={classes.itemLink}>
+          <Avatar className={classes.perfilAvatar} />
+        </Link>
+      </Grid>
+
+      <Divider />
+      <List>
+        <Link
+          to="new/post"
+          className={classes.itemLink}
+          onClick={handleDrawerToggle}
+        >
+          <ListItem button>
+            <ListItemIcon>
+              <IoMdAddCircleOutline size="20px" />
+            </ListItemIcon>
+            <ListItemText primary="Criar Post" />
+          </ListItem>
+        </Link>
+
+        <Link
+          to="/chat"
+          className={classes.itemLink}
+          onClick={handleDrawerToggle}
+        >
+          <ListItem button>
+            <ListItemIcon>
+              <IoIosChatbubbles size="20px" />
+            </ListItemIcon>
+            <ListItemText primary="Chat" />
+          </ListItem>
+        </Link>
+
+        <ListItem button onClick={handleDrawerToggle}>
+          <ListItemIcon>
+            <IoMdLogOut size="20px" />
+          </ListItemIcon>
+          <ListItemText primary="Logout" />
+        </ListItem>
+      </List>
+    </>
+  );
+
+  const logedOut = (
+    <>
+      <div style={{ height: "50px" }} />
+      <Divider />
+
+      <List>
+        <Link
+          to="/register"
+          className={classes.itemLink}
+          onClick={handleDrawerToggle}
+        >
+          <ListItem button>
+            <ListItemText primary="Cadastre-se" />
+          </ListItem>
+        </Link>
+
+        <Link
+          to="/login"
+          className={classes.itemLink}
+          onClick={handleDrawerToggle}
+        >
+          <ListItem button>
+            <ListItemIcon>
+              <IoMdLogIn size="20px" />
+            </ListItemIcon>
+            <ListItemText primary="LogIn" />
+          </ListItem>
+        </Link>
+      </List>
+    </>
+  );
 
   return (
     <Hidden smUp implementation="js">
@@ -33,50 +125,14 @@ export default function MobileSideMenu({ mobileOpen, handleDrawerToggle }) {
         onClose={handleDrawerToggle}
         onOpen={handleDrawerToggle}
         classes={{
-          paper: classes.drawerPaper
+          paper: classes.drawerPaper,
         }}
         ModalProps={{
-          keepMounted: true
+          keepMounted: true,
         }}
       >
-        <Grid
-          container
-          justify="center"
-          alignItems="center"
-          className={classes.avatar}
-        >
-          <Link to="/user" className={classes.itemLink}>
-            <Avatar className={classes.perfilAvatar} />
-          </Link>
-        </Grid>
+        {loged ? logedIn : logedOut}
 
-        <Divider />
-        <List>
-          <Link to="new/post" className={classes.itemLink}>
-            <ListItem button>
-              <ListItemIcon>
-                <IoMdAddCircleOutline size="20px" />
-              </ListItemIcon>
-              <ListItemText primary="Criar Post" />
-            </ListItem>
-          </Link>
-
-          <Link to="/chat" className={classes.itemLink}>
-            <ListItem button>
-              <ListItemIcon>
-                <IoIosChatbubbles size="20px" />
-              </ListItemIcon>
-              <ListItemText primary="Chat" />
-            </ListItem>
-          </Link>
-
-          <ListItem button>
-            <ListItemIcon>
-              <IoMdLogOut size="20px" />
-            </ListItemIcon>
-            <ListItemText primary="Logout" />
-          </ListItem>
-        </List>
         <Divider />
       </SwipeableDrawer>
     </Hidden>
