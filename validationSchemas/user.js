@@ -6,12 +6,12 @@ const userSchema = Joi.object({
   name: Joi.string()
     .trim()
     .min(4)
-    .max(15)
+    .max(20)
     .pattern(antiInject)
     .required(),
   email: Joi.string()
     .trim()
-    .min(6)
+    .max(35)
     .email()
     .pattern(antiInject)
     .required(),

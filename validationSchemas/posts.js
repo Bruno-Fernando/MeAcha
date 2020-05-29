@@ -31,6 +31,7 @@ const foundPostSchema = Joi.object({
     .trim()
     .pattern(antiInject)
     .required()
+    .min(4)
     .max(280),
   meetingPlace: Joi.string()
     .trim()
