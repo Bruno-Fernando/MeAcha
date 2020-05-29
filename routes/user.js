@@ -31,9 +31,9 @@ router.post(
       name,
       email,
       password: hashedPassword,
-      profileImg: req.file.path || "",
+      profileImg: req.file.imgPath || "",
     });
-
+    
     User.create(newUser, (err, createdUser) => {
       if (err) {
         fs.unlinkSync(req.file.imgPath);
