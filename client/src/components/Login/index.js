@@ -56,7 +56,7 @@ export default function Login() {
       history.push("/");
       window.location.reload();
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data.error);
     }
   };
 
