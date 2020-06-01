@@ -1,15 +1,13 @@
-const express = require("express")
+const express = require("express");
 const router = express.Router();
 
+const homePosts = require("./homePosts");
 const post = require("./post");
-const lostPost = require("./lostPosts");
-const foundPost = require("./foundPosts");
 const user = require("./user");
 const auth = require("./auth");
 
-router.use("/", post);
-router.use("/lost", lostPost);
-router.use("/found", foundPost);
+router.use("/", homePosts);
+router.use("/post", post);
 router.use("/user", user);
 router.use("/auth", auth);
 
