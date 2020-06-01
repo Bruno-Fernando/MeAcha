@@ -13,7 +13,7 @@ const authValidation = (req, res, next) => {
 
   try {
     const verified = jwt.verify(token, TOKEN_SECRET);
-    req.user = verified;
+    req.user = verified.token;
 
     next();
   } catch (err) {
