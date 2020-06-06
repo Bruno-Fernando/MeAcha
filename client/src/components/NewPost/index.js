@@ -1,5 +1,5 @@
 import React from "react";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
@@ -54,10 +54,26 @@ const lostPlace = {
 
 export default function NewPost() {
   const classes = useStyles();
-  const { register, handleSubmit, errors, control, getValues } = useForm({
-    mode: "onChange",
+
+  const {
+    register,
+    handleSubmit,
+    errors,
+    getValues,
+    setValue,
+    watch,
+  } = useForm({
+    mode: "onBlur",
   });
-  let { category } = getValues();
+
+  React.useEffect(() => {
+    register({ name: "category" }, { required: true });
+  }, [register]);
+  
+  const selectValue = watch("category");
+  
+  const handleCategoryChange = e => setValue("category", e.target.value);
+
   const onSubmit = (e) => {
     console.log(e);
   };
@@ -77,24 +93,23 @@ export default function NewPost() {
           className={classes.gridInput}
         >
           <InputLabel htmlFor="category">Categoria</InputLabel>
-          <Controller
-            as={
-              <Select label="category">
-                <MenuItem value="lost">Perdido</MenuItem>
-                <MenuItem value="found">Encontrado</MenuItem>
-              </Select>
-            }
+          <Select
+            label="category"
             name="category"
-            rules={{ required: "Escolha uma categoria" }}
-            control={control}
-            defaultValue=""
-          />
+            value={selectValue || ""}
+            onChange={handleCategoryChange}
+          >
+            <MenuItem value="lost">Perdido</MenuItem>
+            <MenuItem value="found">Encontrado</MenuItem>
+          </Select>
           <FormHelperText>
             {errors.category && errors.category.message}
           </FormHelperText>
         </FormControl>
 
         {(() => {
+          const { category } = getValues();
+
           if (category === "found") {
             return (
               <>
@@ -141,7 +156,7 @@ export default function NewPost() {
                   name="bounty"
                   type="number"
                   inputProps={{
-                    inputmode: "numeric",
+                    inputMode: "numeric",
                     pattern: "[0-9]*",
                     min: 0,
                   }}
