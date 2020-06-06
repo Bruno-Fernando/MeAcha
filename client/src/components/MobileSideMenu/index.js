@@ -47,12 +47,8 @@ export default function MobileSideMenu({ mobileOpen, handleDrawerToggle }) {
       </Grid>
 
       <Divider />
-      <List>
-        <Link
-          to="new/post"
-          className={classes.itemLink}
-          onClick={handleDrawerToggle}
-        >
+      <List onClick={handleDrawerToggle}>
+        <Link to="new/post" className={classes.itemLink}>
           <ListItem button>
             <ListItemIcon>
               <IoMdAddCircleOutline size="20px" />
@@ -61,11 +57,7 @@ export default function MobileSideMenu({ mobileOpen, handleDrawerToggle }) {
           </ListItem>
         </Link>
 
-        <Link
-          to="/chat"
-          className={classes.itemLink}
-          onClick={handleDrawerToggle}
-        >
+        <Link to="/chat" className={classes.itemLink}>
           <ListItem button>
             <ListItemIcon>
               <IoIosChatbubbles size="20px" />
@@ -74,7 +66,7 @@ export default function MobileSideMenu({ mobileOpen, handleDrawerToggle }) {
           </ListItem>
         </Link>
 
-        <ListItem button onClick={handleDrawerToggle}>
+        <ListItem button onClick={logOff}>
           <ListItemIcon>
             <IoMdLogOut size="20px" />
           </ListItemIcon>
@@ -89,22 +81,14 @@ export default function MobileSideMenu({ mobileOpen, handleDrawerToggle }) {
       <div style={{ height: "50px" }} />
       <Divider />
 
-      <List>
-        <Link
-          to="/register"
-          className={classes.itemLink}
-          onClick={handleDrawerToggle}
-        >
+      <List onClick={handleDrawerToggle}>
+        <Link to="/register" className={classes.itemLink}>
           <ListItem button>
             <ListItemText primary="Cadastre-se" />
           </ListItem>
         </Link>
 
-        <Link
-          to="/login"
-          className={classes.itemLink}
-          onClick={handleDrawerToggle}
-        >
+        <Link to="/login" className={classes.itemLink}>
           <ListItem button>
             <ListItemIcon>
               <IoMdLogIn size="20px" />
